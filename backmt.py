@@ -50,7 +50,7 @@ def getMyPostLike(graph):
         except:
             data['count']+=0
         ret.append(data)
-        
+
     return {'name': name, 'pic': picture, 'data':ret}
 
 def getMyPostComment(graph):
@@ -65,9 +65,9 @@ def getMyPostComment(graph):
         }
         for dd in d['comments']['data']:
             data['data'].append({'name':dd['from']['name'], 'pic': dd['from']['picture']['data']['url'], 'message':dd['message']})
-        
+
         ret.append(data)
-        
+
     return {'name': name, 'pic': picture, 'data':ret}
 
 def getMyPostShare(graph):
@@ -78,10 +78,10 @@ def getMyPostShare(graph):
     for d in event['posts']['data']:
         data = {
             'message': d['message'],
-            'count':d['shares']['counts']
+            'count':d['shares']['count']
         }
         ret.append(data)
-        
+
     return {'name': name, 'pic': picture, 'data':ret}
 
 def getMyLocation(graph):
@@ -96,7 +96,7 @@ def getMyLocation(graph):
         }
         ret.append(data)
     return {'name': name, 'pic': picture, 'data':ret}
-    
+
 def getMyPage(graph):
     event = graph.request('me?fields=name,likes'+lim+'{name'+pic+'}'+pic)
     name = event['name']
@@ -109,7 +109,7 @@ def getMyPage(graph):
         }
         ret.append(data)
     return {'name': name, 'pic': picture, 'data':ret}
-    
+
 def getMyPageLike(graph):
     event = graph.request('me?fields=name,likes'+lim+'{name,fan_count'+pic+'}'+pic)
     name = event['name']
@@ -123,7 +123,7 @@ def getMyPageLike(graph):
         }
         ret.append(data)
     return {'name': name, 'pic': picture, 'data':ret}
-    
+
 def getMyPagePost(graph):
     event = graph.request('me?fields=name,likes'+lim+'{name,posts'+lim1+pic+'}'+pic)
     name = event['name']
@@ -185,7 +185,7 @@ def getFriendDevice(graph):
 def getFriendPost(graph):
     event = graph.request('me?fields=name,friends'+lim+'{name,posts'+lim1+''+pic+'}'+pic)
     name = event['name']
-    picture = event['picture']['data']['url']    
+    picture = event['picture']['data']['url']
     ret = []
     #print(event['friends']['data'][0]['posts'])
     for friend in event['friends']['data']:
@@ -247,11 +247,11 @@ def getFriendFriend(graph):
             data = data
         ret.append(data)
     return {'name': name, 'pic': picture, 'data':ret}
- 
+
 def getFriendLocation(graph):
     event = graph.request('me?fields=name,friends'+lim+'{name,tagged_places'+lim1+pic+'}'+pic)
     name = event['name']
-    picture = event['picture']['data']['url']    
+    picture = event['picture']['data']['url']
     ret = []
     #print(event['friends']['data'][0]['posts'])
     for friend in event['friends']['data']:
@@ -271,7 +271,7 @@ def getFriendLocation(graph):
             ret = ret
         ret.append(data)
     return {'name': name, 'pic': picture, 'data':ret}
-    
+
 #name, pic, page{name,pic}
 def getFriendLike(graph):
     event = graph.request('me?fields=name,friends'+lim+'{name,likes'+lim1+'{name'+pic+'}'+pic+'}'+pic)
