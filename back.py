@@ -34,7 +34,7 @@ def asr():
                     4	:['ล่าสุด', 'แชร์'],
                     5	:['ล่าสุด', 'ความ', 'คิด', 'เห็น'],
                     6	:['ขอ', 'เพื่อน', 'เรา'],
-                    7	:['อะไร', 'เล่น', 'เฟซ'],
+                    7	:[ 'เล่น', 'เฟซ'],
                     8	:['เพื่อน', 'ของ', 'เพื่อน'],
                     9	:['หนัง', 'สือ'],
                     10	:['เพื่อน', 'โพส'],
@@ -70,6 +70,19 @@ def asr():
             ret['script'] = script
             ret['sentence'] = 'โพสต์ล่าสุดมีคนถูกใจกี่คน'
 
+        elif chk(keywords[7], result):
+            ret = getFriendDevice(graph)
+            ret['type'] = 5
+            script = ""
+            for x in ret['data']:
+                try:
+                    stmp = x['name'] + ' ใช้ ' + str(x['count'])
+                    script = script + tmp
+                except:
+                    script = script
+            ret['script'] = script
+            ret['sentence'] = 'เพื่อนใช้อะไรเล่นเฟซ'
+
         elif chk(keywords[4], result):
             ret = getMyPostShare(graph) #['ล่าสุด', 'แชร์']
             ret['type'] = 2
@@ -103,18 +116,7 @@ def asr():
             ret['script'] = script
             ret['sentence'] = 'ขอดูเพื่อนของเราหน่อย'
 
-        elif chk(keywords[7], result):
-            ret = getFriendDevice(graph)
-            ret['type'] = 5
-            script = ""
-            for x in ret['data']:
-                try:
-                    stmp = x['name'] + ' ใช้ ' + str(x['count'])
-                    script = script + tmp
-                except:
-                    script = script
-            ret['script'] = script
-            ret['sentence'] = 'เพื่อนใช้อะไรเล่นเฟซ'
+
 
         elif chk(keywords[8], result):
             ret = getFriendFriend(graph)
@@ -194,18 +196,18 @@ def asr():
             ret['script'] = script
             ret['sentence'] = 'ขอจำนวนถูกใจของเพจ'
 
-        elif chk(keywords[14], result):
-            ret = getMyPagePost(graph)
-            ret['type'] = 7
-            script = ''
-            for x in ret['data']:
-                try:
-                    tmp = 'เพจ ' + x['name'] + ' โพสต์ว่า ' + x['data'][0]['message'] + ' '
-                    script = script + tmp
-                except:
-                    script = script
-            ret['script'] = script
-            ret['sentence'] = 'เพจโพสต์อะไร'
+        # elif chk(keywords[14], result):
+        #     ret = getMyPagePost(graph)
+        #     ret['type'] = 7
+        #     script = ''
+        #     for x in ret['data']:
+        #         try:
+        #             tmp = 'เพจ ' + x['name'] + ' โพสต์ว่า ' + x['data'][0]['message'] + ' '
+        #             script = script + tmp
+        #         except:
+        #             script = script
+        #     ret['script'] = script
+        #     ret['sentence'] = 'เพจโพสต์อะไร'
 
         elif chk(keywords[15], result):
             ret = getMyPage(graph)
